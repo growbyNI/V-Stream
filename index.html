@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V Stream</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    .bag-img {
+      position: absolute;
+      display: flex;
+    }
+    .top-btn:hover{
+      color: blueviolet;
+    }
+    .trading-container {
+      display: flex;
+    }
+  </style>
+</head>
+<body class="bg-[#0f0f0f] text-white">
+
+  <!-- Header -->
+  <header class="flex flex-wrap items-center justify-between px-6 py-4 bg-black shadow-lg">
+    <h1 class="text-2xl font-bold text-purple-500">V Stream</h1>
+    <nav class="space-x-4 text-sm sm:text-base mt-2 sm:mt-0">
+      <button class="top-btn" id="btn-home">Home</button>
+      <button class="top-btn" id="btn-movies">Movies</button>
+      <button class="top-btn" id="btn-series">Series</button>
+      <button class="top-btn">My list</button>
+    </nav>
+  </header>
+
+  
+
+  <!-- Hero Section -->
+  <section style="background-image: url(https://m.media-amazon.com/images/I/91I34PG2UsL.png);" class="relative h-[60vh] sm:h-[70vh] flex items-center justify-center bg-cover bg-center" style="background-image: url('https://source.unsplash.com/1600x900/?movie');">
+    <div class="glass p-6 sm:p-10 rounded-2xl text-center max-w-lg mx-4">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-2">Watch the Latest Blockbusters</h2>
+      <p class="text-gray-300 mb-4 text-sm sm:text-base">Stream top movies and shows anytime, anywhere.</p>
+      <button class="bg-purple-600 hover:bg-purple-700 px-5 py-2 rounded-full text-white font-semibold text-sm sm:text-base">Start Watching</button>
+    </div>
+  </section>
+
+  <!-- webseries grid -->
+   <section style="display: none;" id="series-btn" class="p-6 sm:p-8">
+    <h2 class="text-xl sm:text-2xl font-semibold mb-4">Webseries</h2>
+    
+    <div id="seriesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      
+       
+      <!-- movie card -->
+       <div  class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]">
+        <a href="movie.html?id=3">
+        <img src="https://drive.google.com/thumbnail?id=10REoIJsAu3eDbcVD_8JAFzEJiRa7p5Yr" alt="Movie Poster" class="w-full h-full object-cover" />
+        </a>
+      </div>
+
+    </div>
+   </section>
+
+
+   <!-- movies grid -->
+
+   <section style="display: none;" id="movies-btn" class="p-6 sm:p-8">
+    <h2 class="text-xl sm:text-2xl font-semibold mb-4">Movies</h2>
+    <div id="movie-Grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+       
+      <!-- movie card -->
+       <div class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]">
+        <a href="movie.html?id=3">
+        <img src="https://drive.google.com/thumbnail?id=1-TB-B4E0CfS47B6TA4Uk-8u9IYVApkA5" alt="Movie Poster" class="w-full h-full object-cover" />
+        </a>
+      </div>
+
+    </div>
+   </section>
+
+   <!-- Comming soon movies -->
+
+   <section id="coming-soon" class="p-6 sm:p-8">
+    <h2 class="text-xl sm:text-2xl font-semibold mb-4">Coming soon</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+
+      <!-- movies 1 -->
+       <div class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]">
+        <a href="movie.html?id=3">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZptj9lJwUC-1rarvuSPSEJwJ1WMW4uTN-ew&s" alt="Movie Poster" class="w-full h-full object-cover" />
+        </a>
+      </div>
+
+      <!-- movie 2 -->
+       <div class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]">
+        <a href="movie.html?id=3">
+        <img src="https://pics.filmaffinity.com/Iron_Man-773611005-large.jpg" alt="Movie Poster" class="w-full h-full object-cover" />
+        </a>
+      </div>
+    </div>
+   </section>
+
+   <!-- newly added -->
+    <section id="newly-stream" class="p-6 sm:p-8">
+      <h2 class="text-xl sm:text-2xl font-semibold mb-4">Newly Stream</h2>
+
+      <div   class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+
+        <!-- movies 1 -->
+
+        <div class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]">
+        <a href="movie.html?id=3">
+        <img src="https://m.media-amazon.com/images/M/MV5BNjhkY2ViNTYtYjc3MC00OWU3LWFhYWMtMjU5ZDhjZTNkYTc3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Movie Poster" class="w-full h-full object-cover" />
+        </a>
+      </div>
+      </div>
+    </section>
+
+
+  <!-- Movie Grid -->
+  <section  id="home-btn" class="p-6 sm:p-8">
+    <h2 class="text-xl sm:text-2xl font-semibold mb-4">Trending Now</h2>
+    <div  id="movieGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      
+      <!-- Movie Card 1 -->
+      <div class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]">
+        <a href="movie.html?id=3">
+        <img src="https://m.media-amazon.com/images/M/MV5BMDNkZmZlOWEtMjIxYS00MzMwLTg4ODYtMDRmNzY2NjY3NDdkXkEyXkFqcGc@._V1_.jpg" alt="Movie Poster" class="w-full h-full object-cover" />
+        </a>
+      </div>
+
+      <!-- Movie Card 2 -->
+      <div class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]">
+        <a href="movie.html?id=strre2">
+        <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/stree-2-et00364249-1721725490.jpg" alt="Movie 2" class="w-full h-full object-cover" />
+        </a>
+      </div>
+
+      <!-- Movie Card 3 -->
+      <div class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]">
+        <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/media_bank/202309/shah-rukh-khan--jawan--srk-films-295651-3x4.jpg?VersionId=RGX_q3pk2AWWdkkOYhypoZSFxDHwV.vF" alt="Movie 3" class="w-full h-full object-cover" />
+      </div>
+
+      <!-- Movie Card 4 -->
+      <div class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]">
+        <img src="https://resizing.flixster.com/yl4Z6PxNXzHmqcvrfa0OFUPoJCk=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzNiMGE5M2M0LWQ0ZGItNDgzOS05Nzc5LWVhMTA4MjY0ZmE2YS5qcGc=" alt="Movie 4" class="w-full h-full object-cover" />
+      </div>
+
+      <!-- Movie Card 5 -->
+      <div class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]">
+        <img src="https://m.media-amazon.com/images/M/MV5BNTE3OTIxZDYtNjA0NC00N2YxLTg1NGQtOTYxNmZkMDkwOWNjXkEyXkFqcGc@._V1_.jpg" alt="Movie 5" class="w-full h-full object-cover" />
+      </div>
+
+      <!-- Movie Card 6 -->
+      <div class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]">
+        <a href="webserises.html?id=Farzi">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ47INWEXlJ7tFER0UXeIUJSTWFuzLD6MtFIA&s" alt="Movie 6" class="w-full h-full object-cover" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 text-center py-6 mt-10 text-sm sm:text-base">
+    &copy; 2025 V Stream. All rights reserved.
+  </footer>
+
+  <script>
+  const grid = document.getElementById('movieGrid');
+
+  firebase.database().ref('movies').once('value').then(snapshot => {
+    const movies = snapshot.val();
+    for (let id in movies) {
+      const movie = movies[id];
+
+      const card = document.createElement('div');
+      card.className = "rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 aspect-[2/3]";
+
+      card.innerHTML = `
+        <a href="movie.html?id=${id}">
+          <img src="${movie.banner}" alt="${movie.title}" class="w-full h-full object-cover" />
+        </a>
+      `;
+
+      grid.appendChild(card);
+    }
+  });
+</script>
+
+<script>
+
+  document.getElementById('btn-series').addEventListener('click', function () {
+       movies();
+       home();
+        document.getElementById('newly-stream').style.display='none';
+       document.getElementById('coming-soon').style.display='none';
+       document.getElementById('series-btn').style.display='block';
+      
+  })
+
+  document.getElementById('btn-movies').addEventListener('click', function () {
+       series();
+       home();
+       document.getElementById('movies-btn').style.display='';
+        document.getElementById('newly-stream').style.display ='none';
+       document.getElementById('coming-soon').style.display='none';
+       
+  })
+
+  document.getElementById('btn-home').addEventListener('click', function () {
+    series();
+    movies();
+    document.getElementById('newly-stream').style.display='';
+       document.getElementById('coming-soon').style.display='';
+    document.getElementById('home-btn').style.display= '';
+    
+  })
+
+  function series () {
+   
+    const series = document.getElementById('series-btn');
+    series.style.display = 'none';
+  }
+ 
+  function movies () {
+   
+    const movie = document.getElementById('movies-btn');
+    movie.style.display = 'none';
+  }
+
+  function home  () {
+     
+     const home = document.getElementById('home-btn');
+    home.style.display = 'none';
+
+  }
+</script>
+
+</body>
+</html>
